@@ -7,28 +7,24 @@ class Paperboy
     @name = name
     @experience = experience
     @earnings = earnings
+    @quota = 50
   end
 
-  def quota
-    quota = 50 + (@experience * 0.5)
-  end
 
   def deliver(start_address, end_address)
     @experience = end_address - start_address
-    if quota <= 50
+    if @experience == @quota
       @earnings = @experience * 0.25
-      @experience += deliver
+    elsif @experience > @quota
+      @earnings = (@quota * 0.25) + ((@experience - @quota) * 0.50)
     else
-      @earnings = quota * 0.25
-
+      @earnings = (@experience * 0.25) - 2
     end
-
+    @quota = @experience + (@experience * 0.5)
   end
-
-
 end
 
 jp = Paperboy.new("JP", 0, 0)
-# puts jp.deliver(1, 51)
-# puts jp.experience
-puts jp.quota
+puts jp.experience
+jp.deliver(1, 51)
+jp.deliver(1, 101)
