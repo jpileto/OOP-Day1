@@ -22,9 +22,18 @@ class Paperboy
     end
     @quota = @experience + (@experience * 0.5)
   end
+
+  def report
+    puts "Hi! I'm #{@name}, I've delivered #{@experience} and I've earned #{@earnings} so far!"
+  end
 end
+
+
+
+
 
 jp = Paperboy.new("JP", 0, 0)
 puts jp.experience
 jp.deliver(1, 51)
 jp.deliver(1, 101)
+jp.report
