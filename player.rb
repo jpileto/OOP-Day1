@@ -14,18 +14,17 @@ class Player
   def collect_treasure
     @gold_coins += 1
     if @gold_coins % 10
-      :level_up
+      level_up
     end
   end
 
   def do_battle
     @health_points -= 1
-    case :do_battle
-    when @health_points == 0
-      @lives -= 1
-      @health_points = 10
-    when @lives == 0
-      :restart
+    if @health_points <= 0
+      @lives = @lives -= 1
+      @health_points = @health_points += 11
+    elsif @lives == 0
+      restart
     end
   end
 
@@ -42,6 +41,8 @@ puts jp.level_up
 puts jp.collect_treasure
 puts jp.gold_coins
 puts jp.lives
-puts jp.do_battle
 puts jp.health_points
 puts jp.lives
+puts jp.do_battle
+puts jp.lives
+puts jp.health_points
